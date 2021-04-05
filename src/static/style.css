@@ -265,3 +265,13 @@ body {
 	padding-top: 1px;
 	font-size: 14px;
 }
+
+#version {
+	margin: 0;
+	position: absolute;
+	left: 50%;
+	top: 10px;
+	transform: translateX(-50%);
+	color: var(--subtle-color);
+	font-size: 12px;
+}

@@ -94,3 +94,7 @@ if (!isDev) {
 		}
 	});
 }
+
+ipcMain.on('app_version', (event) => {
+	event.sender.send('app_version', app.getVersion());
+});
