@@ -3,8 +3,7 @@ const path = require('path');
 const Store = require('electron-store');
 const isDev = require('electron-is-dev');
 const AutoLaunch = require('auto-launch');
-const os = require('os');
-const _ = require('lodash');
+const { autoUpdater } = require('electron-updater');
 
 const configSchema = require('./config-schema.json');
 let config;
@@ -21,9 +20,11 @@ if (require('electron-squirrel-startup')) {
 	app.quit();
 }
 
+let mainWindow;
+
 const createWindow = () => {
 	// Create the browser window.
-	const mainWindow = new BrowserWindow({
+	mainWindow = new BrowserWindow({
 		width: 400,
 		height: 200,
 		frame: false,
@@ -43,6 +44,19 @@ const createWindow = () => {
 
 	ipcMain.on('change-alwaysOnTop', (e, onoff) => {
 		mainWindow.setAlwaysOnTop(onoff);
+	});
+
+	mainWindow.once('ready-to-show', () => {
+		autoUpdater.checkForUpdatesAndNotify();
+	});
+
+	autoUpdater.on('update-available', () => {
+		mainWindow.webContents.send('update_available');
+	});
+
+	autoUpdater.on('update-downloaded', () => {
+		mainWindow.webContents.send('update_downloaded');
+		setTimeout(autoUpdater.quitAndInstall, 2500);
 	});
 };
 
