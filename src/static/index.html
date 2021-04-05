@@ -6,10 +6,27 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Nemon</title>
 		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="checkbox.css" />
 		<script defer src="index.js"></script>
 	</head>
 	<body>
-		<div id="close-btn">
+		<div id="settings-btn" class="icon-btn">
+			<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+				></path>
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+			</svg>
+		</div>
+		<div id="back-btn" class="icon-btn">
+			<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+			</svg>
+		</div>
+		<div id="close-btn" class="icon-btn">
 			<svg stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
 			</svg>
@@ -23,6 +40,24 @@
 				<p id="ping-test-heading" class="ping-test-text">Current ping</p>
 				<p><span id="ping-display">-</span><span id="ping-display-unit">ms</span></p>
 				<p id="ping-to-container" class="ping-test-text">Host: <span id="ping-to">-</span></p>
+			</div>
+		</div>
+		<div id="settings-screen">
+			<div id="settings-list">
+				<div class="settings-list-item">
+					<div class="round-cb">
+						<input type="checkbox" id="cb-alwaysOnTop" />
+						<label for="cb-alwaysOnTop" />
+					</div>
+					<div class="cb-text">Always on top (display over other applications)</div>
+				</div>
+				<div class="settings-list-item">
+					<div class="round-cb">
+						<input type="checkbox" id="cb-launchOnStartup" />
+						<label for="cb-launchOnStartup" />
+					</div>
+					<div class="cb-text">Launch Nemon after bootup</div>
+				</div>
 			</div>
 		</div>
 	</body>

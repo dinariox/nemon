@@ -1,5 +1,19 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
+const Store = require('electron-store');
+const isDev = require('electron-is-dev');
+const AutoLaunch = require('auto-launch');
+const os = require('os');
+const _ = require('lodash');
+
+const configSchema = require('./config-schema.json');
+let config;
+try {
+	config = new Store({ schema: configSchema, clearInvalidConfig: true });
+} catch (err) {
+	dialog.showErrorBox('Error', 'Config file could not be loaded, it may be invalid. Try deleting the config.json file in the installation directory.');
+	return app.exit(0);
+}
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -20,12 +34,16 @@ const createWindow = () => {
 		fullscreenable: false,
 		maximizable: false,
 		resizable: false,
-		alwaysOnTop: true,
+		alwaysOnTop: config.get('alwaysOnTop'),
 		icon: __dirname + '/icons/win/Nemon.ico'
 	});
 
 	// and load the index.html of the app.
 	mainWindow.loadFile(path.join(__dirname, 'static/index.html'));
+
+	ipcMain.on('change-alwaysOnTop', (e, onoff) => {
+		mainWindow.setAlwaysOnTop(onoff);
+	});
 };
 
 // This method will be called when Electron has finished
@@ -56,3 +74,23 @@ app.on('activate', () => {
 ipcMain.on('close-app', () => {
 	app.quit();
 });
+
+if (!isDev) {
+	const autoLauncher = new AutoLaunch({
+		name: 'Nemon'
+	});
+
+	if (config.get('launchOnStartup')) {
+		autoLauncher.enable();
+	} else {
+		autoLauncher.disable();
+	}
+
+	ipcMain.on('change-launchOnStartup', (e, onoff) => {
+		if (onoff) {
+			autoLauncher.enable();
+		} else {
+			autoLauncher.disable();
+		}
+	});
+}
