@@ -19,6 +19,7 @@ const pingToEl = document.getElementById('ping-to');
 const settingsScreenEl = document.getElementById('settings-screen');
 const cbAlwaysOnTopEl = document.getElementById('cb-alwaysOnTop');
 const cbLaunchOnStartupEl = document.getElementById('cb-launchOnStartup');
+const versionEl = document.getElementById('version');
 
 const pingInterval = setInterval(async () => {
 	const res = await ping.promise.probe(DEFAULT_HOST);
@@ -33,6 +34,12 @@ const pingInterval = setInterval(async () => {
 }, 1000);
 
 pingToEl.innerHTML = DEFAULT_HOST;
+
+ipcRenderer.send('app_version');
+ipcRenderer.on('app_version', (e, ver) => {
+	ipcRenderer.removeAllListeners('app_version');
+	versionEl.innerHTML = 'v' + ver;
+});
 
 closeBtnEl.addEventListener('click', () => {
 	ipcRenderer.send('close-app');
