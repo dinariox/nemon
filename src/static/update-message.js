@@ -11,3 +11,7 @@ ipcRenderer.on('update_downloaded', () => {
 	ipcRenderer.removeAllListeners('update_available');
 	updateMessageEl.innerHTML = 'Update downloaded. Application will restart now...';
 });
+
+ipcRenderer.on('update_not_available', () => {
+	console.log('no update available');
+});

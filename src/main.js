@@ -49,15 +49,6 @@ const createWindow = () => {
 	mainWindow.once('ready-to-show', () => {
 		autoUpdater.checkForUpdatesAndNotify();
 	});
-
-	autoUpdater.on('update-available', () => {
-		mainWindow.webContents.send('update_available');
-	});
-
-	autoUpdater.on('update-downloaded', () => {
-		mainWindow.webContents.send('update_downloaded');
-		setTimeout(autoUpdater.quitAndInstall, 2500);
-	});
 };
 
 // This method will be called when Electron has finished
@@ -111,4 +102,19 @@ if (!isDev) {
 
 ipcMain.on('app_version', (event) => {
 	event.sender.send('app_version', app.getVersion());
+});
+
+autoUpdater.on('update-available', () => {
+	mainWindow.webContents.send('update_available');
+});
+
+autoUpdater.on('update-not-available', () => {
+	mainWindow.webContents.send('update_not_available');
+});
+
+autoUpdater.on('update-downloaded', () => {
+	mainWindow.webContents.send('update_downloaded');
+	setTimeout(() => {
+		autoUpdater.quitAndInstall();
+	}, 2500);
 });
