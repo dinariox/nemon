@@ -6,8 +6,8 @@
 	"main": "src/main.js",
 	"scripts": {
 		"start": "electron-forge start",
-		"build": "electron-builder --publish never",
-		"deploy": "electron-builder --publish always"
+		"build": "electron-builder --win --publish never",
+		"deploy": "electron-builder --win --publish always"
 	},
 	"build": {
 		"appId": "nemon",
@@ -69,8 +69,7 @@
 		"electron-squirrel-startup": "^1.0.0",
 		"electron-store": "^7.0.2",
 		"electron-updater": "^4.3.8",
-		"lodash": "^4.17.21",
-		"os": "^0.1.1",
+		"electron-window-state": "^5.0.3",
 		"ping": "^0.4.0"
 	},
 	"devDependencies": {

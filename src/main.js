@@ -4,6 +4,7 @@ const Store = require('electron-store');
 const isDev = require('electron-is-dev');
 const AutoLaunch = require('auto-launch');
 const { autoUpdater } = require('electron-updater');
+const windowStateKeeper = require('electron-window-state');
 
 const configSchema = require('./config-schema.json');
 let config;
@@ -23,10 +24,14 @@ if (require('electron-squirrel-startup')) {
 let mainWindow;
 
 const createWindow = () => {
+	const mainWindowState = windowStateKeeper({ defaultWidth: 400, defaultHeight: 200 });
+
 	// Create the browser window.
 	mainWindow = new BrowserWindow({
-		width: 400,
-		height: 200,
+		width: mainWindowState.width,
+		height: mainWindowState.height,
+		x: mainWindowState.x,
+		y: mainWindowState.y,
 		frame: false,
 		webPreferences: {
 			nodeIntegration: true,
@@ -38,6 +43,8 @@ const createWindow = () => {
 		alwaysOnTop: config.get('alwaysOnTop'),
 		icon: __dirname + '/icons/win/Nemon.ico'
 	});
+
+	mainWindowState.manage(mainWindow);
 
 	// and load the index.html of the app.
 	mainWindow.loadFile(path.join(__dirname, 'static/index.html'));
