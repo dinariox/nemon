@@ -1,12 +1,10 @@
-const { ipcRenderer } = require('electron');
-
 const updateScreenEl = document.getElementById('update-screen');
 const updateMessageEl = document.getElementById('update-message');
 
 ipcRenderer.on('update_available', () => {
 	ipcRenderer.removeAllListeners('update_available');
 	updateMessageEl.innerHTML = 'Update found. Downloading...';
-	updateScreenEl.classList.add('show');
+	updateScreenEl.classList.remove('hidden');
 });
 
 ipcRenderer.on('update_downloaded', () => {
