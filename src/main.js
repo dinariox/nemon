@@ -119,6 +119,10 @@ autoUpdater.on('update-not-available', () => {
 	mainWindow.webContents.send('update_not_available');
 });
 
+autoUpdater.on('download-progress', (progress) => {
+	mainWindow.webContents.send('update_progress', progress);
+});
+
 autoUpdater.on('update-downloaded', () => {
 	mainWindow.webContents.send('update_downloaded');
 	setTimeout(() => {
