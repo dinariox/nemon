@@ -7,28 +7,12 @@
 		"type": "boolean",
 		"default": true
 	},
-	"hosts": {
-		"type": "array",
-		"items": { "type": "string" },
-		"minItems": 1,
-		"default": ["8.8.8.8"]
+	"showInTaskbar": {
+		"type": "boolean",
+		"default": true
 	},
-	"displayedHosts": {
-		"type": "array",
-		"items": { "type": "number" },
-		"minItems": 1,
-		"default": [0]
-	},
-	"pingAvg": {
-		"type": "number",
-		"default": 5
-	},
-	"pingInterval": {
-		"type": "number",
-		"default": 1000
-	},
-	"notAliveConnectionLostThreshold": {
-		"type": "number",
-		"default": 3
+	"showPingChart": {
+		"type": "boolean",
+		"default": true
 	}
 }

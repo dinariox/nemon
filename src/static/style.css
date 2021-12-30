@@ -169,6 +169,7 @@ body {
 	height: 100%;
 	display: grid;
 	place-items: center;
+	overflow: hidden;
 }
 
 @keyframes fadeIn {
@@ -223,6 +224,7 @@ body {
 
 #ping-to-container {
 	bottom: 42px;
+	z-index: 1001;
 }
 
 #ping-test-heading {
@@ -230,7 +232,7 @@ body {
 }
 
 .ping-test-text {
-	color: #576b6d;
+	color: var(--subtle-color);
 	position: absolute;
 	margin: 0;
 	font-weight: 200;
@@ -331,4 +333,24 @@ body {
 
 .tac {
 	text-align: center;
+}
+
+#ping-chart-container {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.ct-line {
+	stroke: #576b6d !important;
+}
+
+.ct-area {
+	fill: #576b6d !important;
+}
+
+.main-screen-content p {
+	z-index: 1002;
 }

@@ -7,10 +7,12 @@
 		<title>Nemon</title>
 		<link rel="stylesheet" href="style.css" />
 		<link rel="stylesheet" href="checkbox.css" />
+		<link rel="stylesheet" href="../../node_modules/chartist/dist/chartist.min.css" />
 		<script defer src="index.js"></script>
 		<script defer src="update-message.js"></script>
 	</head>
 	<body>
+		<!-- HEADER -->
 		<div id="settings-btn" class="icon-btn">
 			<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 				<path
@@ -36,8 +38,11 @@
 			<span class="block"></span>
 			<h1>nemon<span></span></h1>
 		</div>
+
+		<!-- MAIN SCREEN -->
 		<div class="main-screen">
 			<div class="main-screen-content">
+				<div id="ping-chart-container" class="ct-chart"></div>
 				<p id="ping-test-heading" class="ping-test-text">Current ping</p>
 				<p><span id="ping-display">-</span><span id="ping-display-unit">ms</span></p>
 				<p id="ping-to-container" class="ping-test-text">Host: <span id="ping-to">-</span></p>
@@ -56,6 +61,8 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- SETTINGS SCREEN -->
 		<div id="settings-screen">
 			<p id="version">-</p>
 			<div id="settings-list">
@@ -73,8 +80,17 @@
 					</div>
 					<div class="cb-text">Launch Nemon after bootup</div>
 				</div>
+				<div class="settings-list-item">
+					<div class="round-cb">
+						<input type="checkbox" id="cb-showPingChart" />
+						<label for="cb-showPingChart" />
+					</div>
+					<div class="cb-text">Show ping chart (restart required)</div>
+				</div>
 			</div>
 		</div>
+
+		<!-- UPDATE SCREEN -->
 		<div id="update-screen" class="hidden">
 			<p id="update-message"></p>
 		</div>

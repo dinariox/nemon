@@ -7,11 +7,11 @@ const { autoUpdater } = require('electron-updater');
 const windowStateKeeper = require('electron-window-state');
 
 const configSchema = require('./config-schema.json');
-let config;
+let config; // config is stored in %appdata%\Nemon\config.json
 try {
 	config = new Store({ schema: configSchema, clearInvalidConfig: true });
 } catch (err) {
-	dialog.showErrorBox('Error', 'Config file could not be loaded, it may be invalid. Try deleting the config.json file in the installation directory.');
+	dialog.showErrorBox('Error', 'Config file could not be loaded, it may be invalid. Try deleting the config.json file in the installation directory (%appdata%\\Nemon).');
 	return app.exit(0);
 }
 
@@ -56,6 +56,8 @@ const createWindow = () => {
 	mainWindow.once('ready-to-show', () => {
 		autoUpdater.checkForUpdates();
 	});
+
+	console.log(app.getPath('userData'));
 };
 
 // This method will be called when Electron has finished
