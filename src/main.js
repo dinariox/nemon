@@ -54,7 +54,7 @@ const createWindow = () => {
 	});
 
 	mainWindow.once('ready-to-show', () => {
-		autoUpdater.checkForUpdatesAndNotify();
+		autoUpdater.checkForUpdates();
 	});
 };
 
