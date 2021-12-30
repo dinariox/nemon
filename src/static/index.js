@@ -2,7 +2,8 @@
 const { ipcRenderer } = require('electron');
 const ping = require('ping');
 const Store = require('electron-store');
-const config = new Store();
+const configSchema = require('../config-schema.json');
+const config = new Store({ schema: configSchema });
 const Chartist = require('chartist');
 const pingChart = config.get('showPingChart')
 	? new Chartist.Line(
