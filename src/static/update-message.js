@@ -18,5 +18,4 @@ ipcRenderer.on('update_not_available', () => {
 
 ipcRenderer.on('update_progress', (progress) => {
 	console.log(progress);
-	updateMessageEl.innerHTML = `Update found. Downloading...<br/>${progress.percent}% - ${progress.transferred / 1024}/${progress.total / 1024}KB @ ${progress.bytesPerSecond / 1024}KB/s`;
 });
