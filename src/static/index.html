@@ -87,6 +87,25 @@
 					</div>
 					<div class="cb-text">Show ping chart (restart required)</div>
 				</div>
+				<div class="settings-list-item">
+					<div class="tb-text">Which server to ping:</div>
+					<input type="text" class="tb" id="tb-pingTo" placeholder="Host" />
+				</div>
+				<div class="settings-list-item">
+					<div class="tb-text">Ping every</div>
+					<input type="number" min="500" max="10000" step="250" class="tb" id="tb-pingInterval" placeholder="Interval" />
+					<div class="tb-text">ms (restart required)</div>
+				</div>
+				<div class="settings-list-item">
+					<div class="tb-text">Shown ping is the avg of the last</div>
+					<input type="number" min="1" max="10" step="1" class="tb" id="tb-pingAvg" placeholder="Avg" />
+					<div class="tb-text">ping(s)</div>
+				</div>
+				<div class="settings-list-item">
+					<div class="tb-text">Disconnect warning after</div>
+					<input type="number" min="1" max="50" step="1" class="tb" id="tb-notAliveConnectionLostThreshold" placeholder="Treshold" />
+					<div class="tb-text">failed ping(s)</div>
+				</div>
 			</div>
 		</div>
 

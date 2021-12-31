@@ -256,6 +256,9 @@ body {
 	flex-direction: column;
 	width: 100%;
 	margin-top: 40px;
+	height: calc(100% - 40px);
+	overflow-y: scroll;
+	-webkit-app-region: no-drag;
 }
 
 .settings-list-item {
@@ -268,6 +271,28 @@ body {
 	margin-left: 8px;
 	padding-top: 1px;
 	font-size: 14px;
+}
+
+.tb-text {
+	font-size: 14px;
+	padding-top: 5px;
+}
+
+.tb {
+	margin: 0 8px;
+	border: var(--subtle-color) 1px solid;
+	border-radius: 5px;
+	padding: 4px 6px;
+	background-color: var(--subtle-hover-color);
+	outline: none;
+}
+
+.tb:focus {
+	border: var(--intro-block-highlight-color) 1px solid;
+}
+
+#tb-pingInterval {
+	width: 80px;
 }
 
 #update-screen {

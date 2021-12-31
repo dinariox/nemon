@@ -36,15 +36,21 @@ const pingChart = config.get('showPingChart')
 	: null;
 
 // GLOBAL VARS
-// const DEFAULT_HOST = config.get('hosts')[config.get('displayedHosts')[0]];
-const DEFAULT_HOST = '8.8.8.8';
+let DEFAULT_HOST = config.get('host') || '1.1.1.1';
+// const DEFAULT_HOST = '8.8.8.8';
 // const DEFAULT_HOST = 'eu-central367.discord.gg';
-// const DEFAULT_PING_AVG = config.get('pingAvg');
-const DEFAULT_PING_AVG = 5;
-// const PING_INTERVAL = config.get('pingInterval');
-const PING_INTERVAL = 1000;
-// const NOT_ALIVE_CONNECTION_LOST_THRESHOLD = config.get('notAliveConnectionLostThreshold');
-const NOT_ALIVE_CONNECTION_LOST_THRESHOLD = 3;
+let DEFAULT_PING_AVG = config.get('pingAvg') || 5;
+// const DEFAULT_PING_AVG = 5;
+let PING_INTERVAL = config.get('pingInterval') || 1000;
+const PING_INTERVAL_MIN = 500,
+	PING_INTERVAL_MAX = 10000,
+	PING_AVG_MIN = 1,
+	PING_AVG_MAX = 10,
+	CONNECTION_LOST_THRESHOLD_MIN = 1,
+	CONNECTION_LOST_THRESHOLD_MAX = 50;
+// const PING_INTERVAL = 1000;
+let NOT_ALIVE_CONNECTION_LOST_THRESHOLD = config.get('notAliveConnectionLostThreshold') || 3;
+// const NOT_ALIVE_CONNECTION_LOST_THRESHOLD = 3;
 let pingResults = [];
 let notAliveCnt = 0;
 
@@ -58,10 +64,14 @@ const settingsScreenEl = document.getElementById('settings-screen');
 const cbAlwaysOnTopEl = document.getElementById('cb-alwaysOnTop');
 const cbLaunchOnStartupEl = document.getElementById('cb-launchOnStartup');
 const cbShowPingChartEl = document.getElementById('cb-showPingChart');
+const tbPingToEl = document.getElementById('tb-pingTo');
+const tbPingIntervalEl = document.getElementById('tb-pingInterval');
+const tbPingAvgEl = document.getElementById('tb-pingAvg');
+const tbNotAliveConnectionLostThresholdEl = document.getElementById('tb-notAliveConnectionLostThreshold');
 const versionEl = document.getElementById('version');
 const connectionLostEl = document.getElementById('connection-lost');
 
-const pingInterval = setInterval(async () => {
+async function pingIntervalFunc() {
 	const res = await ping.promise.probe(DEFAULT_HOST);
 	if (!res.alive) {
 		notAliveCnt++;
@@ -88,7 +98,9 @@ const pingInterval = setInterval(async () => {
 		data.shift();
 		pingChart.update({ series: [data] });
 	}
-}, PING_INTERVAL);
+}
+
+const pingInterval = setInterval(pingIntervalFunc, PING_INTERVAL);
 
 pingToEl.innerHTML = DEFAULT_HOST;
 
@@ -117,6 +129,10 @@ backBtnEl.addEventListener('click', () => {
 cbAlwaysOnTopEl.checked = config.get('alwaysOnTop');
 cbLaunchOnStartupEl.checked = config.get('launchOnStartup');
 cbShowPingChartEl.checked = config.get('showPingChart');
+tbPingToEl.value = DEFAULT_HOST;
+tbPingIntervalEl.value = PING_INTERVAL;
+tbPingAvgEl.value = DEFAULT_PING_AVG;
+tbNotAliveConnectionLostThresholdEl.value = NOT_ALIVE_CONNECTION_LOST_THRESHOLD;
 
 cbAlwaysOnTopEl.addEventListener('change', (e) => {
 	config.set('alwaysOnTop', e.target.checked);
@@ -128,6 +144,39 @@ cbLaunchOnStartupEl.addEventListener('change', (e) => {
 });
 cbShowPingChartEl.addEventListener('change', (e) => {
 	config.set('showPingChart', e.target.checked);
+});
+tbPingToEl.addEventListener('change', (e) => {
+	DEFAULT_HOST = e.target.value;
+	config.set('host', DEFAULT_HOST);
+	pingToEl.innerHTML = DEFAULT_HOST;
+});
+tbPingIntervalEl.addEventListener('change', (e) => {
+	let val = parseInt(e.target.value);
+	// clamp value between min and max
+	if (val < PING_INTERVAL_MIN) val = PING_INTERVAL_MIN;
+	if (val > PING_INTERVAL_MAX) val = PING_INTERVAL_MAX;
+	PING_INTERVAL = val;
+	e.target.value = val.toString();
+	config.set('pingInterval', PING_INTERVAL);
+});
+tbPingAvgEl.addEventListener('change', (e) => {
+	let val = parseInt(e.target.value);
+	// clamp value between min and max
+	if (val < PING_AVG_MIN) val = PING_AVG_MIN;
+	if (val > PING_AVG_MAX) val = PING_AVG_MAX;
+	DEFAULT_PING_AVG = val;
+	e.target.value = val.toString();
+	config.set('pingAvg', DEFAULT_PING_AVG);
+	pingResults = [];
+});
+tbNotAliveConnectionLostThresholdEl.addEventListener('change', (e) => {
+	let val = parseInt(e.target.value);
+	// clamp value between min and max
+	if (val < CONNECTION_LOST_THRESHOLD_MIN) val = CONNECTION_LOST_THRESHOLD_MIN;
+	if (val > CONNECTION_LOST_THRESHOLD_MAX) val = CONNECTION_LOST_THRESHOLD_MAX;
+	NOT_ALIVE_CONNECTION_LOST_THRESHOLD = val;
+	e.target.value = val.toString();
+	config.set('notAliveConnectionLostThreshold', NOT_ALIVE_CONNECTION_LOST_THRESHOLD);
 });
 
 async function wait(ms) {

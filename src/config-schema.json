@@ -1,4 +1,20 @@
 {
+	"host": {
+		"type": "string",
+		"default": "8.8.8.8"
+	},
+	"pingAvg": {
+		"type": "integer",
+		"default": 5
+	},
+	"pingInterval": {
+		"type": "integer",
+		"default": 1000
+	},
+	"notAliveConnectionLostThreshold": {
+		"type": "integer",
+		"default": 3
+	},
 	"launchOnStartup": {
 		"type": "boolean",
 		"default": false
