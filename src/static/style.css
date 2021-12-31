@@ -259,6 +259,7 @@ body {
 	height: calc(100% - 40px);
 	overflow-y: scroll;
 	-webkit-app-region: no-drag;
+	padding-bottom: 8px;
 }
 
 .settings-list-item {
