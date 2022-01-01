@@ -209,6 +209,12 @@ body {
 	stroke: var(--subtle-hover-color);
 }
 
+#minimize-btn {
+	top: 8px;
+	right: 28px;
+	z-index: 1003;
+}
+
 #close-btn {
 	top: 8px;
 	right: 8px;

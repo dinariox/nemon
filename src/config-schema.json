@@ -23,9 +23,9 @@
 		"type": "boolean",
 		"default": true
 	},
-	"showInTaskbar": {
+	"hideInTaskbar": {
 		"type": "boolean",
-		"default": true
+		"default": false
 	},
 	"showPingChart": {
 		"type": "boolean",

@@ -56,21 +56,26 @@ let notAliveCnt = 0;
 
 // HTML ELEMENTS
 const closeBtnEl = document.getElementById('close-btn');
+const minimizeBtnEl = document.getElementById('minimize-btn');
 const settingsBtnEl = document.getElementById('settings-btn');
 const backBtnEl = document.getElementById('back-btn');
 const pingDisplayEl = document.getElementById('ping-display');
 const pingToEl = document.getElementById('ping-to');
 const settingsScreenEl = document.getElementById('settings-screen');
+const versionEl = document.getElementById('version');
+const connectionLostEl = document.getElementById('connection-lost');
 const cbAlwaysOnTopEl = document.getElementById('cb-alwaysOnTop');
 const cbLaunchOnStartupEl = document.getElementById('cb-launchOnStartup');
+const cbHideInTaskbarEl = document.getElementById('cb-hideInTaskbar');
 const cbShowPingChartEl = document.getElementById('cb-showPingChart');
 const tbPingToEl = document.getElementById('tb-pingTo');
 const tbPingIntervalEl = document.getElementById('tb-pingInterval');
 const tbPingAvgEl = document.getElementById('tb-pingAvg');
 const tbNotAliveConnectionLostThresholdEl = document.getElementById('tb-notAliveConnectionLostThreshold');
-const versionEl = document.getElementById('version');
-const connectionLostEl = document.getElementById('connection-lost');
 
+// = = = = = = = = = = = = = = =
+// = PING FUNCTIONS  = = = = = =
+// = = = = = = = = = = = = = = =
 async function pingIntervalFunc() {
 	const res = await ping.promise.probe(DEFAULT_HOST);
 	if (!res.alive) {
@@ -102,8 +107,21 @@ async function pingIntervalFunc() {
 
 const pingInterval = setInterval(pingIntervalFunc, PING_INTERVAL);
 
+// = = = = = = = = = = = = = = =
+// = DOM SETUP = = = = = = = = =
+// = = = = = = = = = = = = = = =
 pingToEl.innerHTML = DEFAULT_HOST;
+cbAlwaysOnTopEl.checked = config.get('alwaysOnTop');
+cbLaunchOnStartupEl.checked = config.get('launchOnStartup');
+cbShowPingChartEl.checked = config.get('showPingChart');
+tbPingToEl.value = DEFAULT_HOST;
+tbPingIntervalEl.value = PING_INTERVAL;
+tbPingAvgEl.value = DEFAULT_PING_AVG;
+tbNotAliveConnectionLostThresholdEl.value = NOT_ALIVE_CONNECTION_LOST_THRESHOLD;
 
+// = = = = = = = = = = = = = = =
+// = Event Listeners = = = = = =
+// = = = = = = = = = = = = = = =
 ipcRenderer.send('app_version');
 ipcRenderer.on('app_version', (e, ver) => {
 	ipcRenderer.removeAllListeners('app_version');
@@ -112,6 +130,10 @@ ipcRenderer.on('app_version', (e, ver) => {
 
 closeBtnEl.addEventListener('click', () => {
 	ipcRenderer.send('close-app');
+});
+
+minimizeBtnEl.addEventListener('click', () => {
+	ipcRenderer.send('minimize-app');
 });
 
 settingsBtnEl.addEventListener('click', () => {
@@ -126,30 +148,31 @@ backBtnEl.addEventListener('click', () => {
 	backBtnEl.classList.remove('show');
 });
 
-cbAlwaysOnTopEl.checked = config.get('alwaysOnTop');
-cbLaunchOnStartupEl.checked = config.get('launchOnStartup');
-cbShowPingChartEl.checked = config.get('showPingChart');
-tbPingToEl.value = DEFAULT_HOST;
-tbPingIntervalEl.value = PING_INTERVAL;
-tbPingAvgEl.value = DEFAULT_PING_AVG;
-tbNotAliveConnectionLostThresholdEl.value = NOT_ALIVE_CONNECTION_LOST_THRESHOLD;
-
 cbAlwaysOnTopEl.addEventListener('change', (e) => {
 	config.set('alwaysOnTop', e.target.checked);
 	ipcRenderer.send('change-alwaysOnTop', e.target.checked);
 });
+
 cbLaunchOnStartupEl.addEventListener('change', (e) => {
 	config.set('launchOnStartup', e.target.checked);
 	ipcRenderer.send('change-launchOnStartup', e.target.checked);
 });
+
+cbHideInTaskbarEl.addEventListener('change', (e) => {
+	config.set('hideInTaskbar', e.target.checked);
+	ipcRenderer.send('change-hideInTaskbar', e.target.checked);
+});
+
 cbShowPingChartEl.addEventListener('change', (e) => {
 	config.set('showPingChart', e.target.checked);
 });
+
 tbPingToEl.addEventListener('change', (e) => {
 	DEFAULT_HOST = e.target.value;
 	config.set('host', DEFAULT_HOST);
 	pingToEl.innerHTML = DEFAULT_HOST;
 });
+
 tbPingIntervalEl.addEventListener('change', (e) => {
 	let val = parseInt(e.target.value);
 	// clamp value between min and max
@@ -159,6 +182,7 @@ tbPingIntervalEl.addEventListener('change', (e) => {
 	e.target.value = val.toString();
 	config.set('pingInterval', PING_INTERVAL);
 });
+
 tbPingAvgEl.addEventListener('change', (e) => {
 	let val = parseInt(e.target.value);
 	// clamp value between min and max
@@ -169,6 +193,7 @@ tbPingAvgEl.addEventListener('change', (e) => {
 	config.set('pingAvg', DEFAULT_PING_AVG);
 	pingResults = [];
 });
+
 tbNotAliveConnectionLostThresholdEl.addEventListener('change', (e) => {
 	let val = parseInt(e.target.value);
 	// clamp value between min and max
@@ -179,6 +204,9 @@ tbNotAliveConnectionLostThresholdEl.addEventListener('change', (e) => {
 	config.set('notAliveConnectionLostThreshold', NOT_ALIVE_CONNECTION_LOST_THRESHOLD);
 });
 
+// = = = = = = = = = = = = = = =
+// = UTILITY FUNCTIONS = = = = =
+// = = = = = = = = = = = = = = =
 async function wait(ms) {
 	return new Promise((resolve) => {
 		setTimeout(resolve, ms);

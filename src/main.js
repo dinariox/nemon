@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, Tray, nativeImage, Menu } = require('electron');
 const path = require('path');
 const Store = require('electron-store');
 const isDev = require('electron-is-dev');
@@ -22,6 +22,7 @@ if (require('electron-squirrel-startup')) {
 }
 
 let mainWindow;
+let tray;
 
 const createWindow = () => {
 	const mainWindowState = windowStateKeeper({ defaultWidth: 400, defaultHeight: 200 });
@@ -41,7 +42,8 @@ const createWindow = () => {
 		maximizable: false,
 		resizable: false,
 		alwaysOnTop: config.get('alwaysOnTop'),
-		icon: __dirname + '/icons/win/Nemon.ico'
+		icon: path.join(__dirname, 'icons/win/Nemon.ico'),
+		skipTaskbar: config.get('showInTaskbar')
 	});
 
 	mainWindowState.manage(mainWindow);
@@ -53,11 +55,38 @@ const createWindow = () => {
 		mainWindow.setAlwaysOnTop(onoff);
 	});
 
+	ipcMain.on('change-hideInTaskbar', (e, onoff) => {
+		mainWindow.setSkipTaskbar(onoff);
+	});
+
 	mainWindow.once('ready-to-show', () => {
 		autoUpdater.checkForUpdates();
 	});
 
-	console.log(app.getPath('userData'));
+	// Tray
+	const icon = nativeImage.createFromPath(path.join(__dirname, 'icons/win/Nemon.ico'));
+	tray = new Tray(icon);
+	tray.setToolTip('Nemon');
+	tray.setTitle('Nemon');
+	tray.setContextMenu(
+		Menu.buildFromTemplate([
+			{
+				label: 'Show',
+				click: () => {
+					mainWindow.restore();
+				}
+			},
+			{
+				label: 'Quit',
+				click: () => {
+					app.quit();
+				}
+			}
+		])
+	);
+	tray.addListener('double-click', () => {
+		mainWindow.restore();
+	});
 };
 
 // This method will be called when Electron has finished
@@ -87,6 +116,10 @@ app.on('activate', () => {
 
 ipcMain.on('close-app', () => {
 	app.quit();
+});
+
+ipcMain.on('minimize-app', () => {
+	mainWindow.minimize();
 });
 
 if (!isDev) {
