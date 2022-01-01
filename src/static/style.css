@@ -376,11 +376,11 @@ body {
 }
 
 .ct-line {
-	stroke: #576b6d !important;
+	stroke: var(--subtle-color) !important;
 }
 
 .ct-area {
-	fill: #576b6d !important;
+	fill: var(--subtle-color) !important;
 }
 
 .main-screen-content p {
