@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog, Tray, nativeImage, Menu } = require
 const path = require('path');
 const Store = require('electron-store');
 const isDev = require('electron-is-dev');
-const AutoLaunch = require('auto-launch');
+const AutoLaunch = require('easy-auto-launch');
 const { autoUpdater } = require('electron-updater');
 const windowStateKeeper = require('electron-window-state');
 
@@ -43,7 +43,7 @@ const createWindow = () => {
 		resizable: false,
 		alwaysOnTop: config.get('alwaysOnTop'),
 		icon: path.join(__dirname, 'icons/win/Nemon.ico'),
-		skipTaskbar: config.get('showInTaskbar')
+		skipTaskbar: config.get('hideInTaskbar')
 	});
 
 	mainWindowState.manage(mainWindow);
@@ -51,8 +51,10 @@ const createWindow = () => {
 	// and load the index.html of the app.
 	mainWindow.loadFile(path.join(__dirname, 'static/index.html'));
 
+	mainWindow.setAlwaysOnTop(config.get('alwaysOnTop'), 'screen-saver');
+
 	ipcMain.on('change-alwaysOnTop', (e, onoff) => {
-		mainWindow.setAlwaysOnTop(onoff);
+		mainWindow.setAlwaysOnTop(onoff, 'screen-saver');
 	});
 
 	ipcMain.on('change-hideInTaskbar', (e, onoff) => {
