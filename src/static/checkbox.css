@@ -34,8 +34,8 @@
 }
 
 .round-cb input[type='checkbox']:checked + label {
-	background-color: #66bb6a;
-	border-color: #66bb6a;
+	background-color: var(--checkbox-color);
+	border-color: var(--checkbox-color);
 }
 
 .round-cb input[type='checkbox']:checked + label:after {

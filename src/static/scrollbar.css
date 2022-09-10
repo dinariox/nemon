@@ -1,15 +1,15 @@
 ::-webkit-scrollbar {
-	width: 10px;
+	width: 8px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-	background: var(--subtle-hover-color);
+	background: var(--subtle-color);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: var(--subtle-color);
+	background: var(--subtle-hover-color);
 }
 
 /* Handle on hover */

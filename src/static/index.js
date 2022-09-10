@@ -72,6 +72,7 @@ const tbPingToEl = document.getElementById('tb-pingTo');
 const tbPingIntervalEl = document.getElementById('tb-pingInterval');
 const tbPingAvgEl = document.getElementById('tb-pingAvg');
 const tbNotAliveConnectionLostThresholdEl = document.getElementById('tb-notAliveConnectionLostThreshold');
+const selThemeEl = document.getElementById('sel-theme');
 
 // = = = = = = = = = = = = = = =
 // = PING FUNCTIONS  = = = = = =
@@ -118,14 +119,20 @@ tbPingToEl.value = DEFAULT_HOST;
 tbPingIntervalEl.value = PING_INTERVAL;
 tbPingAvgEl.value = DEFAULT_PING_AVG;
 tbNotAliveConnectionLostThresholdEl.value = NOT_ALIVE_CONNECTION_LOST_THRESHOLD;
+selThemeEl.value = config.get('theme');
+changeTheme(selThemeEl.value);
 
 // = = = = = = = = = = = = = = =
 // = Event Listeners = = = = = =
 // = = = = = = = = = = = = = = =
-ipcRenderer.send('app_version');
-ipcRenderer.on('app_version', (e, ver) => {
+ipcRenderer.send('app-version');
+ipcRenderer.on('app-version', (e, ver) => {
 	ipcRenderer.removeAllListeners('app_version');
 	versionEl.innerHTML = 'v' + ver;
+	versionEl.setAttribute('title', 'Show changelog');
+	versionEl.addEventListener('click', () => {
+		ipcRenderer.send('open-changelog');
+	});
 });
 
 closeBtnEl.addEventListener('click', () => {
@@ -204,6 +211,11 @@ tbNotAliveConnectionLostThresholdEl.addEventListener('change', (e) => {
 	config.set('notAliveConnectionLostThreshold', NOT_ALIVE_CONNECTION_LOST_THRESHOLD);
 });
 
+selThemeEl.addEventListener('change', (e) => {
+	config.set('theme', e.target.value);
+	changeTheme(e.target.value);
+});
+
 // = = = = = = = = = = = = = = =
 // = UTILITY FUNCTIONS = = = = =
 // = = = = = = = = = = = = = = =
@@ -216,6 +228,11 @@ async function wait(ms) {
 async function showSettingsButton() {
 	await wait(4000);
 	settingsBtnEl.classList.add('show');
+}
+
+function changeTheme(theme) {
+	document.body.classList.remove('light-theme', 'dark-theme', 'dark-pink-theme');
+	document.body.classList.add(theme + '-theme');
 }
 
 showSettingsButton();

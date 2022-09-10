@@ -1,12 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@200;400;700&display=swap');
 
 :root {
-	--main-bg-color: #354546;
-	--subtle-color: #576b6d;
-	--subtle-hover-color: #85a2a5;
+	/* Theme color vars */
+	--classic-main-bg-color: #354546;
+	--classic-subtle-color: #576b6d;
+	--classic-subtle-hover-color: #85a2a5;
+	--classic-text-color: #ffffff;
+	--classic-checkbox-color: #f2b632;
+
+	--light-main-bg-color: #dae2e2;
+	--light-subtle-color: #8b9494;
+	--light-subtle-hover-color: #8cb9b9;
+	--light-text-color: #1b1d1d;
+	--light-checkbox-color: #46d2eb;
+
+	--dark-main-bg-color: #1b1d1d;
+	--dark-subtle-color: #949494;
+	--dark-subtle-hover-color: #da9253;
+	--dark-text-color: #e2e2e2;
+	--dark-checkbox-color: #f1892d;
+
+	--dark-pink-main-bg-color: #1b1d1d;
+	--dark-pink-subtle-color: #99436b;
+	--dark-pink-subtle-hover-color: #b66790;
+	--dark-pink-text-color: #e2e2e2;
+	--dark-pink-checkbox-color: #c9377b;
+
+	/* Actual color vars */
 	--intro-block-color: #f1892d;
 	--intro-block-highlight-color: #e9d856;
 	--warning-bg-color: #db162f;
+
+	--main-bg-color: var(--classic-main-bg-color);
+	--subtle-color: var(--classic-subtle-color);
+	--subtle-hover-color: var(--classic-subtle-hover-color);
+	--text-color: var(--classic-text-color);
+	--checkbox-color: var(--classic-checkbox-color);
 }
 
 * {
@@ -23,12 +52,36 @@ body {
 
 body {
 	background-color: var(--main-bg-color);
-	color: white;
+	color: var(--text-color);
 	display: grid;
 	place-items: center;
 	height: 100vh;
 	user-select: none;
 	-webkit-app-region: drag;
+}
+
+body.light-theme {
+	--main-bg-color: var(--light-main-bg-color);
+	--subtle-color: var(--light-subtle-color);
+	--subtle-hover-color: var(--light-subtle-hover-color);
+	--text-color: var(--light-text-color);
+	--checkbox-color: var(--light-checkbox-color);
+}
+
+body.dark-theme {
+	--main-bg-color: var(--dark-main-bg-color);
+	--subtle-color: var(--dark-subtle-color);
+	--subtle-hover-color: var(--dark-subtle-hover-color);
+	--text-color: var(--dark-text-color);
+	--checkbox-color: var(--dark-checkbox-color);
+}
+
+body.dark-pink-theme {
+	--main-bg-color: var(--dark-pink-main-bg-color);
+	--subtle-color: var(--dark-pink-subtle-color);
+	--subtle-hover-color: var(--dark-pink-subtle-hover-color);
+	--text-color: var(--dark-pink-text-color);
+	--checkbox-color: var(--dark-pink-checkbox-color);
 }
 
 .title {
@@ -328,6 +381,8 @@ body {
 	transform: translateX(-50%);
 	color: var(--subtle-color);
 	font-size: 12px;
+	cursor: pointer;
+	-webkit-app-region: no-drag;
 }
 
 #connection-lost {

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog, Tray, nativeImage, Menu } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, Tray, nativeImage, Menu, shell } = require('electron');
 const path = require('path');
 const Store = require('electron-store');
 const isDev = require('electron-is-dev');
@@ -144,8 +144,12 @@ if (!isDev) {
 	});
 }
 
-ipcMain.on('app_version', (event) => {
-	event.sender.send('app_version', app.getVersion());
+ipcMain.on('app-version', (event) => {
+	event.sender.send('app-version', app.getVersion());
+});
+
+ipcMain.on('open-changelog', () => {
+	shell.openExternal('https://github.com/dinariox/nemon/releases/tag/v' + app.getVersion());
 });
 
 autoUpdater.on('update-available', () => {
