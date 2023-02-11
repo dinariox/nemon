@@ -231,7 +231,7 @@ async function showSettingsButton() {
 }
 
 function changeTheme(theme) {
-	document.body.classList.remove('light-theme', 'dark-theme', 'dark-pink-theme');
+	document.body.classList.remove('light-theme', 'dark-theme', 'dark-pink-theme', 'dark-blue-theme', 'dark-red-theme', 'dark-green-theme');
 	document.body.classList.add(theme + '-theme');
 }
 

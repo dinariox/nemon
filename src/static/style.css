@@ -26,6 +26,24 @@
 	--dark-pink-text-color: #e2e2e2;
 	--dark-pink-checkbox-color: #c9377b;
 
+	--dark-blue-main-bg-color: #1b1d1d;
+	--dark-blue-subtle-color: #435799;
+	--dark-blue-subtle-hover-color: #6776b6;
+	--dark-blue-text-color: #e2e2e2;
+	--dark-blue-checkbox-color: #374dc9;
+
+	--dark-red-main-bg-color: #1b1d1d;
+	--dark-red-subtle-color: #994343;
+	--dark-red-subtle-hover-color: #b66767;
+	--dark-red-text-color: #e2e2e2;
+	--dark-red-checkbox-color: #c93737;
+
+	--dark-green-main-bg-color: #1b1d1d;
+	--dark-green-subtle-color: #439951;
+	--dark-green-subtle-hover-color: #67b67b;
+	--dark-green-text-color: #e2e2e2;
+	--dark-green-checkbox-color: #37c963;
+
 	/* Actual color vars */
 	--intro-block-color: #f1892d;
 	--intro-block-highlight-color: #e9d856;
@@ -82,6 +100,30 @@ body.dark-pink-theme {
 	--subtle-hover-color: var(--dark-pink-subtle-hover-color);
 	--text-color: var(--dark-pink-text-color);
 	--checkbox-color: var(--dark-pink-checkbox-color);
+}
+
+body.dark-blue-theme {
+	--main-bg-color: var(--dark-blue-main-bg-color);
+	--subtle-color: var(--dark-blue-subtle-color);
+	--subtle-hover-color: var(--dark-blue-subtle-hover-color);
+	--text-color: var(--dark-blue-text-color);
+	--checkbox-color: var(--dark-blue-checkbox-color);
+}
+
+body.dark-red-theme {
+	--main-bg-color: var(--dark-red-main-bg-color);
+	--subtle-color: var(--dark-red-subtle-color);
+	--subtle-hover-color: var(--dark-red-subtle-hover-color);
+	--text-color: var(--dark-red-text-color);
+	--checkbox-color: var(--dark-red-checkbox-color);
+}
+
+body.dark-green-theme {
+	--main-bg-color: var(--dark-green-main-bg-color);
+	--subtle-color: var(--dark-green-subtle-color);
+	--subtle-hover-color: var(--dark-green-subtle-hover-color);
+	--text-color: var(--dark-green-text-color);
+	--checkbox-color: var(--dark-green-checkbox-color);
 }
 
 .title {
@@ -237,7 +279,6 @@ body.dark-pink-theme {
 #ping-display {
 	font-size: 64px;
 	font-weight: 200;
-	margin: 0;
 	margin: 0;
 }
 
