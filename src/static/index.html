@@ -1,142 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Nemon</title>
-		<link rel="stylesheet" href="style.css" />
-		<link rel="stylesheet" href="checkbox.css" />
-		<link rel="stylesheet" href="scrollbar.css" />
-		<link rel="stylesheet" href="../../node_modules/chartist/dist/chartist.min.css" />
-		<script defer src="index.js"></script>
-		<script defer src="update-message.js"></script>
-	</head>
-	<body>
-		<!-- HEADER -->
-		<div id="settings-btn" class="icon-btn">
-			<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-				></path>
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-			</svg>
-		</div>
-		<div id="back-btn" class="icon-btn">
-			<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-			</svg>
-		</div>
-		<div id="minimize-btn" class="icon-btn">
-			<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-			</svg>
-		</div>
-		<div id="close-btn" class="icon-btn">
-			<svg stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-			</svg>
-		</div>
-		<div class="title">
-			<span class="block"></span>
-			<h1>nemon<span></span></h1>
-		</div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Nemon</title>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="checkbox.css" />
+        <link rel="stylesheet" href="scrollbar.css" />
+        <link rel="stylesheet" href="../../node_modules/chartist/dist/chartist.min.css" />
+        <script defer src="index.js"></script>
+        <script defer src="update-message.js"></script>
+    </head>
+    <body>
+        <!-- HEADER -->
+        <div id="settings-btn" class="icon-btn">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                ></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+        </div>
+        <div id="back-btn" class="icon-btn">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+        </div>
+        <div id="minimize-btn" class="icon-btn">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </div>
+        <div id="close-btn" class="icon-btn">
+            <svg stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </div>
+        <div class="title">
+            <span class="block"></span>
+            <h1>nemon<span></span></h1>
+        </div>
 
-		<!-- MAIN SCREEN -->
-		<div class="main-screen">
-			<div class="main-screen-content">
-				<div id="ping-chart-container" class="ct-chart"></div>
-				<p id="ping-test-heading" class="ping-test-text">Current ping</p>
-				<p><span id="ping-display">-</span><span id="ping-display-unit">ms</span></p>
-				<p id="ping-to-container" class="ping-test-text">Host: <span id="ping-to">-</span></p>
-			</div>
-			<div id="connection-lost" class="hidden">
-				<div class="tac">
-					<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-						></path>
-					</svg>
-					<p class="no-connection-p">No connection</p>
-				</div>
-			</div>
-		</div>
+        <!-- MAIN SCREEN -->
+        <div class="main-screen">
+            <div class="main-screen-content">
+                <div class="network-activity-container left">
+                    <p id="tx-sec">170KB/s</p>
+                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <div class="ping-container">
+                    <div id="ping-chart-container" class="ct-chart"></div>
+                    <p><span id="ping-display">-</span><span id="ping-display-unit">ms</span></p>
+                </div>
+                <div class="network-activity-container right">
+                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <p id="rx-sec">3.7MB/s</p>
+                </div>
+            </div>
+            <div id="connection-lost" class="hidden">
+                <div class="tac">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                        ></path>
+                    </svg>
+                    <p class="no-connection-p">No connection</p>
+                </div>
+            </div>
+        </div>
 
-		<!-- SETTINGS SCREEN -->
-		<div id="settings-screen">
-			<a id="version" target="_blank">-</a>
-			<div id="settings-list">
-				<div class="settings-list-item">
-					<div class="tb-text">Theme:</div>
-					<select id="sel-theme" class="tb">
-						<option value="classic">Classic</option>
-						<option value="light">Light</option>
-						<option value="dark">Dark</option>
-						<option value="dark-pink">Dark Pink</option>
-						<option value="dark-blue">Dark Blue</option>
-						<option value="dark-red">Dark Red</option>
-						<option value="dark-green">Dark Green</option>
-					</select>
-				</div>
-				<div class="settings-list-item">
-					<div class="round-cb">
-						<input type="checkbox" id="cb-alwaysOnTop" />
-						<label for="cb-alwaysOnTop" />
-					</div>
-					<div class="cb-text">Always on top (display over other applications)</div>
-				</div>
-				<div class="settings-list-item">
-					<div class="round-cb">
-						<input type="checkbox" id="cb-launchOnStartup" />
-						<label for="cb-launchOnStartup" />
-					</div>
-					<div class="cb-text">Launch Nemon after bootup</div>
-				</div>
-				<div class="settings-list-item">
-					<div class="round-cb">
-						<input type="checkbox" id="cb-hideInTaskbar" />
-						<label for="cb-hideInTaskbar" />
-					</div>
-					<div class="cb-text">Hide Nemon in the taskbar (tray icon remains)</div>
-				</div>
-				<div class="settings-list-item">
-					<div class="round-cb">
-						<input type="checkbox" id="cb-showPingChart" />
-						<label for="cb-showPingChart" />
-					</div>
-					<div class="cb-text">Show ping chart (restart required)</div>
-				</div>
-				<div class="settings-list-item">
-					<div class="tb-text">Which server to ping:</div>
-					<input type="text" class="tb" id="tb-pingTo" placeholder="Host" />
-				</div>
-				<div class="settings-list-item">
-					<div class="tb-text">Ping every</div>
-					<input type="number" min="500" max="10000" step="250" class="tb" id="tb-pingInterval" placeholder="Interval" />
-					<div class="tb-text">ms (restart required)</div>
-				</div>
-				<div class="settings-list-item">
-					<div class="tb-text">Shown ping is the avg of the last</div>
-					<input type="number" min="1" max="10" step="1" class="tb" id="tb-pingAvg" placeholder="Avg" />
-					<div class="tb-text">ping(s)</div>
-				</div>
-				<div class="settings-list-item">
-					<div class="tb-text">Disconnect warning after</div>
-					<input type="number" min="1" max="50" step="1" class="tb" id="tb-notAliveConnectionLostThreshold" placeholder="Treshold" />
-					<div class="tb-text">failed ping(s)</div>
-				</div>
-			</div>
-		</div>
+        <!-- SETTINGS SCREEN -->
+        <div id="settings-screen">
+            <a id="version" target="_blank">-</a>
+            <div id="settings-list">
+                <div class="settings-list-item">
+                    <div class="tb-text">Theme:</div>
+                    <select id="sel-theme" class="tb">
+                        <option value="classic">Classic</option>
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="dark-pink">Dark Pink</option>
+                        <option value="dark-blue">Dark Blue</option>
+                        <option value="dark-red">Dark Red</option>
+                        <option value="dark-green">Dark Green</option>
+                    </select>
+                </div>
+                <div class="settings-list-item">
+                    <div class="round-cb">
+                        <input type="checkbox" id="cb-alwaysOnTop" />
+                        <label for="cb-alwaysOnTop" />
+                    </div>
+                    <div class="cb-text">Always on top (display over other applications)</div>
+                </div>
+                <div class="settings-list-item">
+                    <div class="round-cb">
+                        <input type="checkbox" id="cb-launchOnStartup" />
+                        <label for="cb-launchOnStartup" />
+                    </div>
+                    <div class="cb-text">Launch Nemon after bootup</div>
+                </div>
+                <div class="settings-list-item">
+                    <div class="round-cb">
+                        <input type="checkbox" id="cb-hideInTaskbar" />
+                        <label for="cb-hideInTaskbar" />
+                    </div>
+                    <div class="cb-text">Hide Nemon in the taskbar (tray icon remains)</div>
+                </div>
+                <div class="settings-list-item">
+                    <div class="round-cb">
+                        <input type="checkbox" id="cb-showPingChart" />
+                        <label for="cb-showPingChart" />
+                    </div>
+                    <div class="cb-text">Show ping chart (restart required)</div>
+                </div>
+                <div class="settings-list-item">
+                    <div class="tb-text">Which server to ping:</div>
+                    <input type="text" class="tb" id="tb-pingTo" placeholder="Host" />
+                </div>
+                <div class="settings-list-item">
+                    <div class="tb-text">Ping every</div>
+                    <input type="number" min="500" max="10000" step="250" class="tb" id="tb-pingInterval" placeholder="Interval" />
+                    <div class="tb-text">ms (restart required)</div>
+                </div>
+                <div class="settings-list-item">
+                    <div class="tb-text">Shown ping is the avg of the last</div>
+                    <input type="number" min="1" max="10" step="1" class="tb" id="tb-pingAvg" placeholder="Avg" />
+                    <div class="tb-text">ping(s)</div>
+                </div>
+                <div class="settings-list-item">
+                    <div class="tb-text">Disconnect warning after</div>
+                    <input type="number" min="1" max="50" step="1" class="tb" id="tb-notAliveConnectionLostThreshold" placeholder="Treshold" />
+                    <div class="tb-text">failed ping(s)</div>
+                </div>
+            </div>
+        </div>
 
-		<!-- UPDATE SCREEN -->
-		<div id="update-screen" class="hidden">
-			<p id="update-message"></p>
-		</div>
-	</body>
+        <!-- UPDATE SCREEN -->
+        <div id="update-screen" class="hidden">
+            <p id="update-message"></p>
+        </div>
+    </body>
 </html>

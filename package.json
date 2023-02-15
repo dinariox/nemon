@@ -1,7 +1,7 @@
 {
 	"name": "nemon",
 	"productName": "Nemon",
-	"version": "0.5.1",
+	"version": "0.6.0",
 	"description": "Network/internet monitoring tool",
 	"main": "src/main.js",
 	"scripts": {
@@ -71,7 +71,8 @@
 		"electron-store": "^7.0.2",
 		"electron-updater": "^4.3.8",
 		"electron-window-state": "^5.0.3",
-		"ping": "^0.4.0"
+		"ping": "^0.4.0",
+		"systeminformation": "^5.17.9"
 	},
 	"devDependencies": {
 		"@electron-forge/cli": "^6.0.0-beta.54",
