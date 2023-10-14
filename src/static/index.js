@@ -55,11 +55,16 @@ const closeBtnEl = document.getElementById("close-btn");
 const minimizeBtnEl = document.getElementById("minimize-btn");
 const settingsBtnEl = document.getElementById("settings-btn");
 const backBtnEl = document.getElementById("back-btn");
+const speedtestBtnEl = document.getElementById("speedtest-btn");
+const startSpeedtestBtnEl = document.getElementById("start-speedtest-btn");
 const pingDisplayEl = document.getElementById("ping-display");
 
 const txSecEl = document.getElementById("tx-sec");
 const rxSecEl = document.getElementById("rx-sec");
+const downloadSpeedEl = document.getElementById("download-speed");
+const uploadSpeedEl = document.getElementById("upload-speed");
 const settingsScreenEl = document.getElementById("settings-screen");
+const speedtestScreenEl = document.getElementById("speedtest-screen");
 const versionEl = document.getElementById("version");
 const connectionLostEl = document.getElementById("connection-lost");
 const cbAlwaysOnTopEl = document.getElementById("cb-alwaysOnTop");
@@ -169,6 +174,25 @@ ipcRenderer.on("app-version", (e, ver) => {
     });
 });
 
+ipcRenderer.on("speedtest-data-download", (e, speed) => {
+    const downloadSpeed = ((speed / 1000000) * 8).toFixed(1);
+    downloadSpeedEl.innerHTML = downloadSpeed;
+});
+
+ipcRenderer.on("speedtest-data-upload", (e, speed) => {
+    const uploadSpeed = ((speed / 1000000) * 8).toFixed(1);
+    uploadSpeedEl.innerHTML = uploadSpeed;
+});
+
+ipcRenderer.on("speedtest-data-result", (e, downloadSpeed, uploadSpeed) => {
+    console.log("Speedtest done!");
+    const downloadSpeedMbps = ((downloadSpeed / 1000000) * 8).toFixed(1);
+    const uploadSpeedMbps = ((uploadSpeed / 1000000) * 8).toFixed(1);
+    downloadSpeedEl.innerHTML = downloadSpeedMbps;
+    uploadSpeedEl.innerHTML = uploadSpeedMbps;
+    startSpeedtestBtnEl.removeAttribute("disabled");
+});
+
 closeBtnEl.addEventListener("click", () => {
     ipcRenderer.send("close-app");
 });
@@ -180,13 +204,30 @@ minimizeBtnEl.addEventListener("click", () => {
 settingsBtnEl.addEventListener("click", () => {
     settingsScreenEl.classList.add("show");
     settingsBtnEl.classList.remove("show");
+    speedtestBtnEl.classList.remove("show");
     backBtnEl.classList.add("show");
 });
 
 backBtnEl.addEventListener("click", () => {
     settingsScreenEl.classList.remove("show");
     settingsBtnEl.classList.add("show");
+    speedtestBtnEl.classList.add("show");
+    speedtestScreenEl.classList.remove("show");
     backBtnEl.classList.remove("show");
+});
+
+speedtestBtnEl.addEventListener("click", () => {
+    speedtestScreenEl.classList.add("show");
+    settingsBtnEl.classList.remove("show");
+    speedtestBtnEl.classList.remove("show");
+    backBtnEl.classList.add("show");
+});
+
+startSpeedtestBtnEl.addEventListener("click", () => {
+    ipcRenderer.send("start-speedtest");
+    startSpeedtestBtnEl.setAttribute("disabled", true);
+    downloadSpeedEl.innerHTML = "-";
+    uploadSpeedEl.innerHTML = "-";
 });
 
 cbAlwaysOnTopEl.addEventListener("change", (e) => {
@@ -262,6 +303,7 @@ async function wait(ms) {
 async function showSettingsButton() {
     await wait(4000);
     settingsBtnEl.classList.add("show");
+    speedtestBtnEl.classList.add("show");
 }
 
 function changeTheme(theme) {

@@ -293,6 +293,37 @@ body.dark-green-theme {
     height: 24px;
 }
 
+#speedtest-results {
+    display: grid;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr min-content min-content min-content 1fr;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+#speedtest-results svg {
+    width: 32px;
+    height: 32px;
+}
+
+#speedtest-results p {
+    margin: 0;
+    font-size: 20px;
+}
+
+#speedtest-results p.align-right {
+    text-align: right;
+}
+
+#speedtest-results p#speedtest-mbps {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -348,6 +379,12 @@ body.dark-green-theme {
     left: 8px;
 }
 
+#speedtest-btn {
+    display: none;
+    top: 8px;
+    left: 28px;
+}
+
 #settings-screen {
     display: none;
     width: 100%;
@@ -355,6 +392,60 @@ body.dark-green-theme {
     position: absolute;
     background-color: var(--main-bg-color);
     z-index: 1000;
+}
+
+#speedtest-screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: var(--main-bg-color);
+    z-index: 1000;
+}
+
+#speedtest-screen #speedtest-title {
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-color);
+}
+
+#speedtest-screen #start-speedtest-btn {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-color);
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+    background-color: var(--subtle-color);
+    padding: 8px 16px;
+    border-radius: 99px;
+    font-size: 14px;
+    border: none;
+}
+
+#speedtest-screen #start-speedtest-btn:hover {
+    background-color: var(--subtle-hover-color);
+}
+
+#speedtest-screen #start-speedtest-btn:disabled {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
+    background-size: 200% 100%;
+    background-position: 100%;
+    animation: gradient 2s linear infinite;
+    cursor: default;
+    color: #999;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 100%;
+    }
+    100% {
+        background-position: -100%;
+    }
 }
 
 .show {
