@@ -7,4 +7,11 @@ Nemon provides a little window which constantly shows your current ping to a ser
 <img src="https://i.imgur.com/kyKPvrj.png" />
 
 ## Installation
-To install nemon, simply download the newest installer .exe from the [releases page](https://github.com/dinariox/nemon/releases) and follow the instructions given by the installer. Nemon has an auto-updater built-in, so if I ever decide to publish updates it will be downloaded automatically the next time you start the application.
+Download the Windows installer or Linux AppImage from the [releases page](https://github.com/dinariox/nemon/releases). On Windows, run the `.exe` installer. On Linux, make the `.AppImage` executable and run it:
+
+```sh
+chmod +x Nemon-*.AppImage
+./Nemon-*.AppImage
+```
+
+To build and publish both the Windows installer and Linux AppImage in one GitHub release, run `npm run deploy`. Nemon's auto-updater checks for published updates when the app starts.

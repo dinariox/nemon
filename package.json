@@ -1,13 +1,14 @@
 {
 	"name": "nemon",
 	"productName": "Nemon",
-	"version": "0.7.1",
+	"version": "0.7.2",
 	"description": "Network/internet monitoring tool",
 	"main": "src/main.js",
 	"scripts": {
 		"start": "electron-forge start",
 		"build": "electron-builder --win --publish never",
-		"deploy": "electron-builder --win --publish always"
+		"build-linux": "electron-builder --linux AppImage --publish never",
+		"deploy": "electron-builder --win --linux AppImage --publish always"
 	},
 	"build": {
 		"appId": "nemon",
@@ -67,21 +68,27 @@
 		"command-exists": "^1.2.9",
 		"easy-auto-launch": "^6.0.2",
 		"electron-is-dev": "^2.0.0",
-		"electron-json-storage": "^4.4.0",
-		"electron-squirrel-startup": "^1.0.0",
-		"electron-store": "^7.0.2",
-		"electron-updater": "^4.3.8",
+		"electron-json-storage": "^4.6.0",
+		"electron-squirrel-startup": "^1.0.1",
+		"electron-store": "^8.2.0",
+		"electron-updater": "^6.8.11",
 		"electron-window-state": "^5.0.3",
-		"ping": "^0.4.0",
+		"ping": "^0.4.4",
 		"systeminformation": "^5.17.9"
 	},
 	"devDependencies": {
-		"@electron-forge/cli": "^6.0.0-beta.54",
-		"@electron-forge/maker-deb": "^6.0.0-beta.54",
-		"@electron-forge/maker-rpm": "^6.0.0-beta.54",
-		"@electron-forge/maker-squirrel": "^6.0.0-beta.54",
-		"@electron-forge/maker-zip": "^6.0.0-beta.54",
-		"electron": "^23.0.0",
-		"electron-builder": "^22.10.3"
+		"@electron-forge/cli": "^8.0.1",
+		"@electron-forge/maker-deb": "^8.0.1",
+		"@electron-forge/maker-rpm": "^8.0.1",
+		"@electron-forge/maker-squirrel": "^8.0.1",
+		"@electron-forge/maker-zip": "^8.0.1",
+		"electron": "^45.1.0",
+		"electron-builder": "^26.18.0"
+	},
+	"allowScripts": {
+		"electron@45.1.0": true,
+		"lzma-native@8.0.6": true,
+		"electron-winstaller@5.4.0": true,
+		"electron-winstaller@5.4.4": true
 	}
 }

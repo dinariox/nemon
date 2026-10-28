@@ -75,7 +75,6 @@ body {
     place-items: center;
     height: 100vh;
     user-select: none;
-    -webkit-app-region: drag;
 }
 
 body.light-theme {
@@ -344,10 +343,20 @@ body.dark-green-theme {
 }
 
 .icon-btn {
-    z-index: 1001;
+    z-index: 1003;
     position: absolute;
     cursor: pointer;
     -webkit-app-region: no-drag;
+}
+
+#drag-handle {
+    position: absolute;
+    top: 0;
+    left: 48px;
+    right: 48px;
+    height: 32px;
+    z-index: 1002;
+    -webkit-app-region: drag;
 }
 
 .icon-btn svg {
